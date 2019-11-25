@@ -16,31 +16,31 @@ frame_array = []
 for image in img_files:
     file = cv.imread(path_in + image)
 
-#     # crop image
-#     file = file[60:320, 380:]
-#     # black out unnecessary parts in cropped image
-#     # right polygon
-#     file[:185, 240:] = 0
-#     file[:, 205:] = 0
-#     file[:170, 200:] = 0
-#     file[:165, 180:] = 0
-#     file[:158, 160:] = 0
-#     file[:153, 150:] = 0
-#     file[:143, 144:] = 0
-#     file[50:135, 130:] = 0
-#     file[60:130, 120:] = 0
-#     file[70:125, 110:] = 0
-#     file[80:115, 100:] = 0
-#     file[90:110, 95:] = 0
-#     # top left polygon
-#     for length, width in zip(np.arange(5,96,5), np.arange(150,0,-10)):
-#         file[:length,:width]=0
-#     # bottom left polygon
-#     for length, width in zip(np.arange(150,245, 5), np.arange(0,190,10)):
-#         file[length:,:width]=0
+    # crop image
+    file = file[60:320, 380:]
+    # black out unnecessary parts in cropped image
+    # right polygon
+    file[:185, 240:] = 0
+    file[:, 205:] = 0
+    file[:170, 200:] = 0
+    file[:165, 180:] = 0
+    file[:158, 160:] = 0
+    file[:153, 150:] = 0
+    file[:143, 144:] = 0
+    file[50:135, 130:] = 0
+    file[60:130, 120:] = 0
+    file[70:125, 110:] = 0
+    file[80:115, 100:] = 0
+    file[90:110, 95:] = 0
+    # top left polygon
+    for length, width in zip(np.arange(5,96,5), np.arange(150,0,-10)):
+        file[:length,:width]=0
+    # bottom left polygon
+    for length, width in zip(np.arange(150,245, 5), np.arange(0,190,10)):
+        file[length:,:width]=0
 
-#     # save frame
-#     frame_array.append(file)
+    # save frame
+    frame_array.append(file)
 
 # # background subtractor
 # bg_sub = cv.createBackgroundSubtractorMOG2(history = 5, varThreshold=100, detectShadows=False)
@@ -65,7 +65,7 @@ app = Flask(__name__)
 @app.route('/') # homepage
 def index():
     # render the template in link
-    return render_template('index.html', output = img_files[-1])
+    return render_template('index.html', output = len(frame_array))
 
 if __name__ == '__main__':
     app.debug = True

@@ -12,9 +12,9 @@ psycopg2-binary = "*"
 flask-sqlalchemy = "*"
 gunicorn = "*"
 numpy = "*"
-opencv-python = "*"
 scikit-image = "*"
 scipy = "*"
+install = "*"
 
 [requires]
 python_version = "3.7"
