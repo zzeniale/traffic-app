@@ -12,6 +12,7 @@ flask = "*"
 gunicorn = "*"
 flask-sqlalchemy = "*"
 opencv-python-headless = "*"
+keras = "*"
 
 [requires]
 python_version = "3.7"
