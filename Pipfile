@@ -11,7 +11,7 @@ scipy = "*"
 flask = "*"
 gunicorn = "*"
 flask-sqlalchemy = "*"
-opencv-python = "==3.4.5.20"
+opencv-python-headless = "*"
 
 [requires]
 python_version = "3.7"
