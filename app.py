@@ -1,7 +1,7 @@
 import numpy as np 
 import os
 
-# import cv2 as cv
+import cv2 as cv
 # from skimage.util import img_as_ubyte
 # from skimage.restoration import denoise_tv_chambolle
 # from scipy import ndimage as ndi
@@ -11,10 +11,10 @@ from flask import Flask, render_template, request
 path_in = '../../../../Desktop/images/4713/'
 img_files = [f for f in os.listdir(path_in) if f != '.DS_Store'][-6:]
 
-# frame_array = []
+frame_array = []
 
-# for image in img_files:
-#     file = cv.imread(path_in + image)
+for image in img_files:
+    file = cv.imread(path_in + image)
 
 #     # crop image
 #     file = file[60:320, 380:]
