@@ -13,6 +13,7 @@ flask-sqlalchemy = "*"
 opencv-python-headless = "*"
 pillow = "*"
 numpy = "*"
+requests = "*"
 
 [requires]
 python_version = "3.7"

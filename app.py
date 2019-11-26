@@ -1,11 +1,9 @@
 from flask import Flask, render_template, request
 import numpy as np 
-import requests, shutil, signal, time, random
+import requests, signal, time
 from PIL import Image
-
 # initalise app
 app = Flask(__name__)
-
 
 # set timeout
 hours = 12
