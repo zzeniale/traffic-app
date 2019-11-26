@@ -31,37 +31,31 @@ fetch(url)
     cameras.forEach(entry => {
         if (entry.camera_id == 4713){
             // original image
-            const card1 = document.createElement('div')
-            card1.setAttribute('class','card')
+            const card = document.createElement('div')
+            card.setAttribute('class','card')
 
-            const h1_1 = document.createElement('h1')
-            h1_1.textContent = entry.camera_id
+            const h1 = document.createElement('h1')
+            h1.textContent = entry.camera_id
 
             const image = document.createElement("img")
             image.src = entry.image
             
-            container.appendChild(card1)
-            card1.appendChild(h1_1)
-            card1.appendChild(image)
-
-            // foreground mask
-            const card2 = document.createElement('div')
-            card2.setAttribute('class','card')
-
-            const h1_2 = document.createElement('h1')
-            h1_2.textContent = "foreground"
-            
-            container.appendChild(card2)
-            card2.appendChild(h1_2)
+            container.appendChild(card)
+            card.appendChild(h1)
+            card.appendChild(image)
         }
     })
 })
 .catch(err => { throw err })
     
     </script>
+    <div class="card">
+      <h1>Predictions</h1>
+      
+      {% if output %}
+      <p>{{ output }}</p>
+      {% endif %}
 
-    {% if output %}
-    <h1>{{ output }}</h1>
-    {% endif %}
+    </div>
   </body>
 </html>
