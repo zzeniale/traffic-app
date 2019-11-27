@@ -14,7 +14,7 @@ opencv-python-headless = "*"
 pillow = "*"
 numpy = "*"
 requests = "*"
-apscheduler = "*"
+apscheduler = "==2.1.2"
 
 [requires]
 python_version = "3.7"
