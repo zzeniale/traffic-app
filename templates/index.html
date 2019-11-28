@@ -11,51 +11,47 @@
   </head>
 
   <body>
-    <div id="root"></div>
-    <script>
-    const app = document.getElementById('root')
+    <div id="root">
+      <div id="container">
+        <script>
+          // const app = document.getElementById('root')
+          const container = document.getElementById('container')
 
-    const container = document.createElement('div')
-    container.setAttribute('class', 'container')
+          // const container = document.createElement('div')
+          // container.setAttribute('class', 'container')
 
-    // app.appendChild(logo)
-    app.appendChild(container)
+          // app.appendChild(container)
 
-    // const fetch = require("node-fetch")
-    let url = 'https://api.data.gov.sg/v1/transport/traffic-images'
+          // const fetch = require("node-fetch")
+          let url = 'https://api.data.gov.sg/v1/transport/traffic-images'
 
-    fetch(url)
-    .then(res => res.json())
-    .then(data => {
-        var cameras = data.items[0].cameras
-        cameras.forEach(entry => {
-            if (entry.camera_id == 4713){
-                // original image
-                const card = document.createElement('div')
-                card.setAttribute('class','card')
+          fetch(url)
+          .then(res => res.json())
+          .then(data => {
+              var cameras = data.items[0].cameras
+              cameras.forEach(entry => {
+                  if (entry.camera_id == 4713){
+                      // create new card
+                      const card = document.createElement('div')
+                      card.setAttribute('class','card')
+                      // add original image to card
+                      const image = document.createElement("img")
+                      image.src = entry.image
+                      
+                      container.appendChild(card)
+                      card.appendChild(image)
+                  }  })  })
+          .catch(err => { throw err })
+        </script>
+      </div>
 
-                const h1 = document.createElement('h1')
-                h1.textContent = entry.camera_id
+      <div class="card">
+        <h1>Predictions</h1>
 
-                const image = document.createElement("img")
-                image.src = entry.image
-                
-                container.appendChild(card)
-                card.appendChild(h1)
-                card.appendChild(image)
-            }
-        })
-    })
-    .catch(err => { throw err })
-    
-    </script>
-    <div class="container">
-      <h1>Predictions</h1>
-
-      {% if output %}
-      <p>{{ output }}</p>
-      {% endif %}
-
+        {% if output %}
+        <p>{{ output }}</p>
+        {% endif %}
+      </div>
     </div>
   </body>
 </html>
