@@ -14,13 +14,13 @@
     <div id="root">
       <div id="container">
         <script>
-          // const app = document.getElementById('root')
-          const container = document.getElementById('container')
+          const app = document.getElementById('root')
+          // const container = document.getElementById('container')
 
-          // const container = document.createElement('div')
-          // container.setAttribute('class', 'container')
+          const container = document.createElement('div')
+          container.setAttribute('class', 'container')
 
-          // app.appendChild(container)
+          app.appendChild(container)
 
           // const fetch = require("node-fetch")
           let url = 'https://api.data.gov.sg/v1/transport/traffic-images'
@@ -45,18 +45,27 @@
                       container.appendChild(card)
                       card.appendChild(h1)
                       card.appendChild(image)
+
+                      const card2 = document.createElement('div')
+                      card2.setAttribute('class','card')
+                      // add header
+                      const h1_2 = document.createElement('h1')
+                      h1_2.textContent = "Predictions"
+
+                      container.appendChild(card2)
+                      card2.appendChild(h1_2)
                   }  })  })
           .catch(err => { throw err })
         </script>
       </div>
 
-      <div class="card">
+      <!-- <div class="card">
         <h1>Predictions</h1>
 
         {% if output %}
         <p>{{ output }}</p>
         {% endif %}
-      </div>
+      </div> -->
     </div>
   </body>
 </html>
