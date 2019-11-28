@@ -34,11 +34,16 @@
                       // create new card
                       const card = document.createElement('div')
                       card.setAttribute('class','card')
+                      // add header
+                      const h1 = document.createElement('h1')
+                      h1.textContent = "Current traffic"
+
                       // add original image to card
                       const image = document.createElement("img")
                       image.src = entry.image
                       
                       container.appendChild(card)
+                      container.appendChild(h1)
                       card.appendChild(image)
                   }  })  })
           .catch(err => { throw err })
