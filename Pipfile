@@ -16,6 +16,7 @@ requests = "*"
 psycopg2 = "*"
 psycopg2-binary = "*"
 pandas = "*"
+matplotlib = "*"
 
 [requires]
 python_version = "3.7"
