@@ -19,10 +19,8 @@ app = Flask(__name__)
 # query = "SELECT time FROM {}".format(settings.traffic_images)
 # df = pd.read_sql(query, con=conn)
 db_url = 'postgres://syabijfoqfvajg:e6a840c9052355747fc5846aeb7c30496e66e9791da2d34344cab27a088d52ea@ec2-23-21-70-39.compute-1.amazonaws.com:5432/dd9l90skhvq2c0'
-engine = SQLAlchemy.create_engine(db_url)
-conn = engine.connect()
-results = conn.execute("SELECT time FROM traffic_images")
-df = pd.DataFrame(results)
+engine = SQLAlchemy.create_engine(db_url, {})
+df = pd.read_sql_query("SELECT time FROM traffic_images", engine)
 
 
 
