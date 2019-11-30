@@ -22,14 +22,11 @@ db_url = 'postgres://syabijfoqfvajg:e6a840c9052355747fc5846aeb7c30496e66e9791da2
 engine = db.create_engine(db_url, {})
 df = pd.read_sql_query("SELECT time FROM traffic_images", engine)
 
-
-
 # create route
 @app.route('/') # homepage
 def index():
 
-
-    return df.head()
+    return df.loc[27,'time']
     # render the template in link
     # return render_template('index.html', output = "testest")
 
