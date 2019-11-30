@@ -19,7 +19,7 @@ df = pd.read_sql_query("SELECT image FROM traffic_images ORDER BY db_id DESC LIM
 @app.route('/') # homepage
 def index():
     sample = df.loc[0,'image']
-    return (len(sample))
+    return f"{len(sample)}"
     # render the template in link
     # return render_template('index.html', output = "testest")
 
