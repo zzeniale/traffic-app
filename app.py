@@ -13,13 +13,14 @@ app.config['SQLALCHEMY_DATABASE_URI'] = db_url
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 db = SQLAlchemy(app)
 engine = db.create_engine(db_url, {})
-df = pd.read_sql_query("SELECT image FROM traffic_images ORDER BY db_id DESC LIMIT 6", engine)
+images = pd.read_sql_query("SELECT image FROM traffic_images ORDER BY db_id DESC LIMIT 6", engine)
 
 # create route
 @app.route('/') # homepage
 def index():
     sample = df.loc[0,'image']
     return f"{len(sample)}"
+    
     # render the template in link
     # return render_template('index.html', output = "testest")
 
