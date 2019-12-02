@@ -9,7 +9,6 @@ verify_ssl = true
 flask = "*"
 gunicorn = "*"
 flask-sqlalchemy = "*"
-opencv-python-headless = "*"
 pillow = "*"
 numpy = "*"
 requests = "*"
@@ -19,6 +18,9 @@ pandas = "*"
 matplotlib = "*"
 joblib = "*"
 xgboost = "*"
+opencv-python-headless = "*"
+scikit-image = "*"
+scipy = "*"
 
 [requires]
 python_version = "3.7"

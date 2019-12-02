@@ -4,6 +4,14 @@ import os
 import pandas as pd
 import matplotlib.pyplot as plt
 
+from xgboost import XGBRegressor
+import joblib
+
+import cv2 as cv
+from skimage.util import img_as_ubyte
+from skimage.restoration import denoise_tv_chambolle
+from scipy import ndimage as ndi
+
 # initalise app
 app = Flask(__name__)
 
@@ -16,8 +24,21 @@ engine = db.create_engine(db_url, {})
 images = pd.read_sql_query("SELECT image FROM traffic_images ORDER BY db_id DESC LIMIT 6", engine)
 
 # process images
-processed_images = []
+white_px = []
+img = []
+split_img = pd.DataFrame(columns=np.arange(1,17))
 bg_sub = cv.createBackgroundSubtractorMOG2(history = 5, varThreshold=100, detectShadows=False)
+
+def split_image(input_img):
+    width = int(input_img.shape[0]/4)
+    split = []
+    for h in [1,2,3,4]:
+        for w in [1,2,3,4]:
+            img = input_img[(h - 1)*width : width*h,
+                            (w - 1)*width : width*w]
+            split.append(img)
+    return split
+
 for image in images.values:
     image = np.array(image[0])
     # crop image
@@ -45,17 +66,32 @@ for image in images.values:
     fill = ndi.binary_fill_holes(thresh)
     fill = img_as_ubyte(fill)
     processed_images.append(fill)
+    
+    foreground = fill.ravel()
+    white_px.append(len(foreground[foreground == 255]))
+    img.append(fill)
+
+    split = split_image(fill)
+    split_df = pd.DataFrame([split], columns=np.arange(1,17))
+    split_img = split_img.append(split_df)
+
+foreground = pd.DataFrame({'whites':white_px,
+                           'image':img})
+split_img.reset_index(inplace=True)
+foreground = foreground.join(split_img)
+foreground.drop('index',axis=1,inplace=True)
+foreground_px = foreground[[col for col in foreground if col != 'whites']].applymap(lambda x:x.mean())
+foreground_px = foreground_px.join(foreground.whites)
 
 # import model
-from xgboost import XGBRegressor
-import joblib
-model = joblib.load('xgb.model')
-prediction = model.predict(processed_images[-1])
+model = joblib.load('./models/xgb.model')
+prediction = model.predict(foreground_px.loc[5:,:])
 
 # create route
 @app.route('/') # homepage
 def index():
-    return prediction
+    value = int(prediction[0])
+    return value
     
     # render the template in link
     # return render_template('index.html', output = "testest")
