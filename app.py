@@ -2,6 +2,7 @@ from flask import Flask, render_template, request
 from flask_sqlalchemy import SQLAlchemy
 import os
 import pandas as pd
+import numpy as np
 import matplotlib.pyplot as plt
 
 from xgboost import XGBRegressor
