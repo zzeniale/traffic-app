@@ -84,7 +84,7 @@ foreground_px = foreground[[col for col in foreground if col != 'whites']].apply
 foreground_px = foreground_px.join(foreground.whites)
 
 # import model
-model = joblib.load('./models/xgb.model')
+model = joblib.load('xgb.model')
 prediction = model.predict(foreground_px.loc[5:,:])
 
 # create route
