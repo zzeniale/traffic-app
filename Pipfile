@@ -18,9 +18,9 @@ pandas = "*"
 matplotlib = "*"
 joblib = "*"
 xgboost = "*"
-opencv-python-headless = "*"
 scikit-image = "*"
 scipy = "*"
+opencv-python = "==3.4.5.20"
 
 [requires]
 python_version = "3.7"
