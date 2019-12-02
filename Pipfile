@@ -17,6 +17,8 @@ psycopg2 = "*"
 psycopg2-binary = "*"
 pandas = "*"
 matplotlib = "*"
+joblib = "*"
+xgboost = "*"
 
 [requires]
 python_version = "3.7"
