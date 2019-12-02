@@ -66,7 +66,6 @@ for image in images.values:
     ret,thresh = cv.threshold(denoise_tv,0.15,255,cv.THRESH_BINARY)
     fill = ndi.binary_fill_holes(thresh)
     fill = img_as_ubyte(fill)
-    img.append(fill)
     
     foreground = fill.ravel()
     white_px.append(len(foreground[foreground == 255]))
