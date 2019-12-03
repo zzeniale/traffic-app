@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>Traffic App</title>
+
+    <link href="https://fonts.googleapis.com/css?family=Dosis:400,700" rel="stylesheet" />
+    <link href="../static/style.css" rel="stylesheet" />
+  </head>
+
+  <body>
+    <div id="root">
+      <div id="container">
+        <script>
+          const app = document.getElementById('root')
+          // const container = document.getElementById('container')
+
+          const container = document.createElement('div')
+          container.setAttribute('class', 'container')
+
+          app.appendChild(container)
+
+          // const fetch = require("node-fetch")
+          let url = 'https://api.data.gov.sg/v1/transport/traffic-images'
+
+          fetch(url)
+          .then(res => res.json())
+          .then(data => {
+              var cameras = data.items[0].cameras
+              cameras.forEach(entry => {
+                  if (entry.camera_id == 4713){
+                      // create new card
+                      const card = document.createElement('div')
+                      card.setAttribute('class','card')
+                      // add header
+                      const h1 = document.createElement('h1')
+                      h1.textContent = "Current traffic"
+
+                      // add original image to card
+                      const image = document.createElement("img")
+                      image.src = entry.image
+                      
+                      container.appendChild(card)
+                      card.appendChild(h1)
+                      card.appendChild(image)
+
+                      const card2 = document.createElement('div')
+                      card2.setAttribute('class','card')
+                      // add header
+                      const h1_2 = document.createElement('h1')
+                      h1_2.textContent = "Predictions"
+
+                      container.appendChild(card2)
+                      card2.appendChild(h1_2)
+                  }  })  })
+          .catch(err => { throw err })
+        </script>
+      </div>
+
+      <!-- <div class="card">
+        <h1>Predictions</h1>
+
+        {% if output %}
+        <p>{{ output }}</p>
+        {% endif %}
+      </div> -->
+    </div>
+  </body>
+</html>
