@@ -1,94 +1,71 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-	<title>traffic</title>
-	<meta charset="UTF-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	
-	<!-- Google font -->
-	<link href="https://fonts.googleapis.com/css?family=Lato:300,300i,400,400i,700,700i&display=swap" rel="stylesheet">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-	<!-- Main Stylesheets -->
-	<link rel="stylesheet" href="css/style.css"/>
+    <title>Traffic App</title>
 
-	<!--[if lt IE 9]>
-		<script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
-		<script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
-	<![endif]-->
-</head>
+    <link href="https://fonts.googleapis.com/css?family=Dosis:400,700" rel="stylesheet" />
+    <link href="../static/style.css" rel="stylesheet" />
+  </head>
 
-<body>
-	<!-- Page Preloder -->
-	<div id="preloder">
-		<div class="loader"></div>
-	</div>
+  <body>
+    <div id="root">
+      <div id="container">
+        <script>
+          const app = document.getElementById('root')
+          // const container = document.getElementById('container')
 
-	<!-- Hero section -->
-	<section class="hero-section">
-		<!-- <div class="hero-slider owl-carousel"> -->
-			<div class="hs-item">
-        
-        <!-- the top image -->
-        <div class="hs-bg set-bg sm-overlay" data-setbg="1.jpg"></div>
-        
-        <!-- the text next to the image -->
-				<div class="sp-container">
-					<div class="hs-text">
-						<h2>The Look<br>Gallery</h2>
-						<p>John Doe  Showcase<br>23 January - 14 February</p>
-						<a href="#" class="site-btn sb-big">Read More <img src="img/icons/arrow-right-black.png" alt=""></a>
-					</div>
-        </div>
-			</div>
+          const container = document.createElement('div')
+          container.setAttribute('class', 'container')
 
-		<!-- </div> -->
-	</section>
-	<!-- Hero section end -->
+          app.appendChild(container)
 
-	<!-- Footer section  -->
-	<footer class="footer-section spad">
-		<div class="sp-container">
-			<div class="row m-0">
-				<div class="col-lg-4 footer-text">
-					<h2>Get in touch</h2>
-					<p>Pellentesque dictum nisl in nibh dictum volutpat nec a quam. Vivamus suscipit nisl quis nulla pretium, vitae ornare leo sollic itudin. Aenean quis velit pulvinar, pellentesque neque vel, laoreet orci. Suspendisse potenti. </p>
-				</div>
-				<div class="col-lg-8">
-					<form class="contact-form">
-						<div class="row">
-							<div class="col-lg-4">
-								<input type="text" placeholder="Your Name">
-							</div>
-							<div class="col-lg-4">
-								<input type="text" placeholder="Your Email">
-							</div>
-							<div class="col-lg-4">
-								<input type="text" placeholder="Subject">
-							</div>
-							<div class="col-lg-12">
-								<textarea placeholder="Message"></textarea>
-								<button class="site-btn sb-light" type="submit">send message <img src="img/icons/arrow-right-white.png" alt=""></button>
-							</div>
-						</div>
-					</form>
-				</div>
-			</div>
-			<div class="copyright"><!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
-Copyright &copy;<script>document.write(new Date().getFullYear());</script> All rights reserved | This template is made with <i class="fa fa-heart-o" aria-hidden="true"></i> by <a href="https://colorlib.com" target="_blank">Colorlib</a>
-<!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. --></div>
-		</div>
-	</footer>
-	<!-- Footer section end -->
-	
-	
-	<!--====== Javascripts & Jquery ======-->
-	<script src="js/jquery-3.2.1.min.js"></script>
-	<script src="js/bootstrap.min.js"></script>
-	<script src="js/jquery.slicknav.min.js"></script>
-	<script src="js/owl.carousel.min.js"></script>
-	<script src="js/circle-progress.min.js"></script>
-	<script src="js/main.js"></script>
+          // const fetch = require("node-fetch")
+          let url = 'https://api.data.gov.sg/v1/transport/traffic-images'
 
+          fetch(url)
+          .then(res => res.json())
+          .then(data => {
+              var cameras = data.items[0].cameras
+              cameras.forEach(entry => {
+                  if (entry.camera_id == 4713){
+                      // create new card
+                      const card = document.createElement('div')
+                      card.setAttribute('class','card')
+                      // add header
+                      const h1 = document.createElement('h1')
+                      h1.textContent = "Current traffic"
 
-	</body>
+                      // add original image to card
+                      const image = document.createElement("img")
+                      image.src = entry.image
+                      
+                      container.appendChild(card)
+                      card.appendChild(h1)
+                      card.appendChild(image)
+
+                      const card2 = document.createElement('div')
+                      card2.setAttribute('class','card')
+                      // add header
+                      const h1_2 = document.createElement('h1')
+                      h1_2.textContent = "Predictions"
+
+                      container.appendChild(card2)
+                      card2.appendChild(h1_2)
+                  }  })  })
+          .catch(err => { throw err })
+        </script>
+      </div>
+
+      <!-- <div class="card">
+        <h1>Predictions</h1>
+
+        {% if output %}
+        <p>{{ output }}</p>
+        {% endif %}
+      </div> -->
+    </div>
+  </body>
 </html>
