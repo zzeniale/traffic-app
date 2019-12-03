@@ -91,10 +91,9 @@ prediction = model.predict(foreground_px.loc[5:,:])
 @app.route('/') # homepage
 def index():
     value = int(prediction[0])
-    return f"{value}"
+    # return f"{value}"
     
-    # render the template in link
-    # return render_template('index.html', output = "testest")
+    return render_template('index.html', output = value)
 
 
 if __name__ == '__main__':
