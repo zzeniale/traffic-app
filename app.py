@@ -97,5 +97,6 @@ def index():
 
 
 if __name__ == '__main__':
+    app.debug = True
     # run the app
     app.run()
