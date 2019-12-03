@@ -50,7 +50,14 @@
         <h1 class="h3 mb-3 font-weight-normal">Number of cars in image:</h1>
         <br/>
         <p class="mt-5 mb-3 text-muted">{{ output }}</p>
+        <script>
+            if (data && (data != prev_data)) {      // if there is data, and it's changed
 
+              // update the contents of several HTML divs via jQuery
+              $('div#value').html(data.value);
+              $('div#contents').html(data.contents);
+        
+        </script>
 
     </form>
 
